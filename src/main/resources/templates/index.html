@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marathon Event Booking</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f8f9fa;
+	margin: 0;
+	padding: 0;
+}
+
+.navbar {
+	background-color: #343a40;
+}
+
+.navbar-brand {
+	color: #fff;
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+	color: #fff;
+	font-weight: bold;
+}
+
+/* Styles for the slider */
+.carousel-item {
+	height: 400px; /* Adjust height as needed */
+	background-size: cover;
+	background-position: center;
+}
+
+.carousel-caption {
+	top: 50%;
+	transform: translateY(-50%);
+	color: #fff;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Style for control buttons */
+.carousel-control-prev, .carousel-control-next {
+	width: auto;
+	height: auto;
+	font-size: 2rem;
+}
+
+/* Style for About Us section */
+#about {
+	padding: 100px 0 50px; /* Adjust top padding */
+	background-color: #fff;
+	text-align: center;
+}
+
+#about h3 {
+	color: #343a40;
+	font-weight: bold;
+	font-size: 2rem;
+}
+
+#about p {
+	color: #666;
+	font-size: 1.2rem;
+	margin-top: 20px;
+}
+
+/* Style for Our Services section */
+#services {
+	padding: 100px 0 50px; /* Adjust top padding */
+	background-color: #f8f9fa;
+	text-align: center;
+}
+
+#services h3 {
+	color: #343a40;
+	font-weight: bold;
+	font-size: 2rem;
+}
+
+#services .row {
+	margin-top: 30px;
+}
+
+#services .col {
+	border: 1px solid #ccc;
+	padding: 20px;
+	border-radius: 10px;
+	background-color: #fff;
+	margin-bottom: 20px;
+}
+
+/* Style for footer */
+#footer {
+	background-color: #343a40;
+	color: #fff;
+	transition: box-shadow 0.3s ease-in-out;
+}
+
+#footer p {
+	margin-bottom: 5px;
+}
+
+#footer:hover {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Container for the grid layout */
+.sponsor-container {
+	display: flex;
+	overflow: hidden;
+	padding: 20px; /* Padding for the container */
+}
+
+/* Style for individual sponsor logos */
+.sponsor-logo {
+	width: 120px; /* Adjust the width of each sponsor logo */
+	height: auto; /* Maintain aspect ratio */
+	margin-right: 20px; /* Spacing between sponsor logos */
+	transition: transform 0.5s ease;
+	/* Smooth transition for sliding effect */
+}
+
+.sponsor-image, .partner-image, .associate-image {
+	width: 150px; /* Adjust width as needed */
+	height: 120px; /* Adjust height as needed */
+}
+
+.sponsor-item, .partner-item, .associate-item {
+	background-color: white;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+		<div class="container">
+			<a class="navbar-brand" href="/">B12 Marathon</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="/aboutus">About
+							Us</a></li>
+					<li class="nav-item"><a class="nav-link" href="/services">Services</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/results">Results</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/contactus">Contact
+							Us</a></li>
+					<li class="nav-item"><a class="nav-link" href="/dashboard">Admin</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Bootstrap Carousel with Slider -->
+	<div id="carouselExampleSlidesOnly" class="carousel slide"
+		data-bs-ride="carousel">
+		
+		<div class="carousel-inner">
+		    <!-- Iterate over each poster and generate carousel items -->
+		    <div th:each="poster, iterStat : ${posters}" class="carousel-item" th:classappend="${iterStat.index == 0} ? 'active'">
+		        <img th:src="@{/images/posters/{imageName}(imageName=${poster.imageName})}" alt="Poster Image" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover; min-height: 150px;">
+		    </div>
+		</div>					
+		
+		<!-- Control buttons -->
+		<button class="carousel-control-prev" type="button"
+			data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button"
+			data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Next</span>
+		</button>
+	</div>
+
+	<!-- About Us Section -->
+	<section id="about">
+		<div class="container">
+			<h3 class="text-center mb-5">About Us</h3>
+			<div class="row">
+				<div class="col">
+					<p>B12 Marathon is a leading organizer of marathon events,
+						dedicated to promoting health, fitness, and community engagement.
+						With our experienced team and state-of-the-art facilities, we
+						strive to provide participants with unforgettable experiences and
+						opportunities to achieve their fitness goals. Join us today and be
+						part of the B12 Marathon community!</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Services Section -->
+	<section id="services" class="py-5 bg-light">
+		<div class="container">
+			<h3 class="text-center mb-5">Our Services</h3>
+			<div class="row">
+				<!-- Service 1: Personalized Training -->
+				<div class="col-lg-4 mb-4">
+					<div class="card h-100 border-0 shadow">
+						<div class="card-body text-center">
+							<h4 class="card-title">Personalized Training</h4>
+							<p class="card-text">Tailored training programs designed to
+								help you achieve your fitness goals effectively.</p>
+						</div>
+					</div>
+				</div>
+				<!-- Service 2: Nutritional Guidance -->
+				<div class="col-lg-4 mb-4">
+					<div class="card h-100 border-0 shadow">
+						<div class="card-body text-center">
+							<h4 class="card-title">Nutritional Guidance</h4>
+							<p class="card-text">Expert advice on nutrition to optimize
+								your performance and overall well-being.</p>
+						</div>
+					</div>
+				</div>
+				<!-- Service 3: Event Support -->
+				<div class="col-lg-4 mb-4">
+					<div class="card h-100 border-0 shadow">
+						<div class="card-body text-center">
+							<h4 class="card-title">Event Support</h4>
+							<p class="card-text">Comprehensive support during marathon
+								events to ensure a smooth and enjoyable experience.</p>
+						</div>
+					</div>
+				</div>
+				<!-- Service 4: Injury Prevention -->
+				<div class="col-lg-4 mb-4">
+					<div class="card h-100 border-0 shadow">
+						<div class="card-body text-center">
+							<h4 class="card-title">Injury Prevention</h4>
+							<p class="card-text">Specialized techniques and exercises to
+								prevent injuries and maintain peak performance.</p>
+						</div>
+					</div>
+				</div>
+				<!-- Service 5: Recovery Therapies -->
+				<div class="col-lg-4 mb-4">
+					<div class="card h-100 border-0 shadow">
+						<div class="card-body text-center">
+							<h4 class="card-title">Recovery Therapies</h4>
+							<p class="card-text">Advanced recovery treatments to
+								accelerate muscle recovery and reduce post-exercise soreness.</p>
+						</div>
+					</div>
+				</div>
+				<!-- Service 6: Performance Analysis -->
+				<div class="col-lg-4 mb-4">
+					<div class="card h-100 border-0 shadow">
+						<div class="card-body text-center">
+							<h4 class="card-title">Performance Analysis</h4>
+							<p class="card-text">Detailed analysis of your performance
+								metrics to optimize training strategies and achieve better
+								results.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Registration Form Section -->
+	<section id="registration" class="py-5">
+		<div class="container">
+			<h3 class="text-center mb-4">Marathon Event Registration</h3>
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<form action="/add-participant" th:object="${participant}" method="post" id="registrationForm">					
+						<div class="mb-3">
+							<label for="name" class="form-label">Name</label> <input
+								type="text" class="form-control" th:field="*{name}" id="name"
+								placeholder="Enter your name">
+						</div>
+						<div class="mb-3">
+							<label for="age" class="form-label">Age</label> <input
+									type="number" class="form-control" th:field="*{age}" id="age"
+									placeholder="Enter your age">
+						</div>
+						<div class="mb-3">
+							<label class="form-label" for="gender">Gender</label>
+							<select class="form-control" id="gender" th:field="*{gender}">
+							    <option value="male">Male</option>
+							    <option value="female">Female</option>
+							    <option value="other">Other</option>
+							</select>																		
+						</div>
+						<div class="mb-3">
+							<label for="email" class="form-label">Email</label> <input
+								type="email" class="form-control" th:field="*{email}" id="email"
+								placeholder="Enter your email"  >
+						</div>
+						<div class="mb-3">
+							<label for="category" class="form-label">Event Category</label> <select
+									class="form-select" id="category" th:field="*{category}">
+									<option value="5k">5K</option>
+									<option value="10k">10K</option>
+									<option value="21k">21K</option>
+									<option value="42k">42K</option>
+								</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">T-shirt Size</label>
+							<select class="form-select" id="tshirtSize" th:field="*{tshirtSize}">
+							    <option value="XS">XS</option>
+							    <option value="S">S</option>
+							    <option value="M">M</option>
+							    <option value="L">L</option>
+							    <option value="XL">XL</option>
+							    <option value="XXL">XXL</option>
+							</select>														
+						</div>				
+						<div class="mb-3">
+							<label for="address" class="form-label">Address</label>
+							<textarea class="form-control" id="address" rows="3"
+								placeholder="Enter your address" th:field="*{address}"></textarea>
+						</div>
+						<div class="text-center">
+							<button type="submit" class="btn btn-dark">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Valued Associates Section -->
+	<section id="associates" class="py-5 bg-light">
+    <div class="container">
+        <h3 class="text-center mb-4">Valued Associates</h3>
+        <div class="row justify-content-center">
+            <!-- Iterate over associates -->
+            <div th:each="associate : ${associates}" class="col-md-3 mb-4">
+                <div class="associate-item text-center p-3 border shadow">
+                    <!-- Use Thymeleaf expressions to access associate properties -->
+                    <img th:src="@{/images/associates/{imageName}(imageName=${associate.logoName})}" th:alt="${associate.name}" class="associate-image img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+	</section>
+
+ 
+	<!-- Valued Sponsors Section -->
+	<section id="sponsors" class="py-5 bg-light">
+	    <div class="container">
+	        <h3 class="text-center mb-4">Valued Sponsors</h3>
+	        <div class="row justify-content-center">            
+	            <div th:each="sponsor : ${sponsors}" class="col-md-3 mb-4">
+	                <div class="sponsor-item text-center p-3 border shadow">
+	                    <!-- Display sponsor image -->
+	                    <img th:src="@{/images/sponsors/{imageName}(imageName=${sponsor.logoName})}" alt="Sponsor" class="sponsor-image img-fluid">
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</section>
+ 
+
+	<!-- Valued Partners Section -->
+	<section id="partners" class="py-5 bg-light">
+	    <div class="container">
+	        <h3 class="text-center mb-4">Valued Partners</h3>
+	        <div class="row justify-content-center">
+	            <!-- Iterate over all partners -->
+	            <div th:each="partner : ${partners}" class="col-md-3 mb-4">
+	                <div class="partner-item text-center p-3 border shadow">
+	                    <!-- Display partner image -->
+	                    <img th:src="@{/images/partners/{imageName}(imageName=${partner.logoName})}" alt="Partner" class="partner-image img-fluid">
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</section>
+
+
+	<!-- Footer Section -->
+	<footer id="footer" class="bg-dark text-white py-4">
+		<div class="container text-center">
+			<p>&copy; 2024 B12 Marathon. All rights reserved.</p>
+			<ul class="list-inline">
+				<li class="list-inline-item"><a href="#about"
+					class="text-white">About Us</a></li>
+				<li class="list-inline-item"><a href="#services"
+					class="text-white">Services</a></li>
+				<li class="list-inline-item"><a href="/contactus"
+					class="text-white">Contact Us</a></li>
+			</ul>
+		</div>
+	</footer>
+
+	<!-- Bootstrap Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		// Activate carousel
+		$('.carousel').carousel();
+	</script>
+	<script>
+		document.getElementById("registrationForm").addEventListener("submit", function(event) {
+        // Show alert for successful submission
+        alert("Form submitted successfully!");
+
+        // Submit the form
+        event.target.submit();
+    });    
+	</script>
+	
+</body>
+</html>

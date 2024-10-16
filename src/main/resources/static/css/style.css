@@ -1,0 +1,17 @@
+/* Footer positioning */
+.footer {
+    width: 100%;
+    background-color: #f8f9fa; /* Set background color of footer */
+    padding: 20px 0; /* Add padding to the top and bottom */
+}
+
+/* Container styles */
+.container {
+    padding-bottom: 109px; /* Add padding bottom to create space for the footer */
+}
+
+/* Body overflow */
+body {
+    overflow: auto; /* Add overflow to handle content overflow */
+}
+

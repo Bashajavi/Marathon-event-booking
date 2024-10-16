@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Custom CSS -->
+<style>
+/* Custom styles for cards */
+.card-custom {
+	border: none;
+	border-radius: 15px;
+	background-color: #fff;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: box-shadow 0.3s;
+}
+
+.card-custom:hover {
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-header-custom {
+	background-color: #343a40;
+	color: #fff;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	padding: 15px;
+}
+
+.card-title-custom {
+	margin-bottom: 0;
+}
+
+.card-body-custom {
+	padding: 20px;
+}
+
+.card-footer-custom {
+	background-color: #f8f9fa;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	padding: 15px;
+}
+
+/* Additional styles */
+.card-footer-custom a {
+	color: #fff;
+}
+</style>
+</head>
+<body>
+
+	<header>
+	<div th:fragment="navbar">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">Marathon Booking</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNav" aria-controls="navbarNav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto my-2 my-lg-0">
+				    <li class="nav-item active"><a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a></li>										
+				    <li class="nav-item"><a class="nav-link" href="manage-sponsors">Sponsors</a></li>
+				    <li class="nav-item"><a class="nav-link" href="manage-partners">Partners</a></li>
+				    <li class="nav-item"><a class="nav-link" href="manage-associates">Associates</a></li>
+				    <li class="nav-item"><a class="nav-link" href="manage-posters">Posters</a></li>
+				    <li class="nav-item"><a class="nav-link" href="manage-gallery">Credentials</a></li>					
+				    <li class="nav-item"><a class="nav-link" href="manage-participants">Participants</a></li>
+				    <li class="nav-item"><a class="nav-link" href="manage-contacts">Contact Us</a></li>					
+				    <li class="nav-item"><a class="nav-link" href="register">Register</a></li>					
+				    <!-- Logout Button -->
+				    <form th:action="@{/logout}" method="post" class="text-center text-light m-0 p-0">
+					    <button type="submit" class="btn logout-btn text-light float-left float-sm-none px-0 outline-none">Logout</button>
+					</form>
+				    <!-- <li class="nav-item"><a class="nav-link" href="#">Logout</a></li> -->
+				</ul>
+			</div>
+		</nav>
+		</div>
+	</header>
+
+	<div class="container mt-4">
+		<h1 class="text-center mb-4">Welcome to the Marathon Event
+			Booking Dashboard</h1>
+		<div class="row">
+			<!-- Card for Sponsors -->
+			<div class="col-md-3 col-12 mb-4">
+				<div class="card card-custom">
+					<div class="card-header card-header-custom">
+						<h5 class="card-title card-title-custom">Sponsors</h5>
+					</div>
+					<div class="card-body card-body-custom">						
+						 <p class="card-text">
+	                        Total sponsors: <span th:text="${totalSponsors}"></span>
+	                    </p>
+					</div>
+					<div class="card-footer card-footer-custom">
+						<a href="manage-sponsors" class="btn btn-primary btn-block">Manage Sponsors</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Card for Partners -->
+			<div class="col-md-3 col-12 mb-4">
+				<div class="card card-custom">
+					<div class="card-header card-header-custom">
+						<h5 class="card-title card-title-custom">Partners</h5>
+					</div>
+					<div class="card-body card-body-custom">
+						<p class="card-text">
+	                        Total Partners: <span th:text="${totalPartners}"></span>
+	                    </p>
+					</div>
+					<div class="card-footer card-footer-custom">
+						<a href="manage-partners" class="btn btn-primary btn-block">Manage Partners</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Card for Associaters -->
+			<div class="col-md-3 col-12 mb-4">
+				<div class="card card-custom">
+					<div class="card-header card-header-custom">
+						<h5 class="card-title card-title-custom">Associates</h5>
+					</div>					
+					<div class="card-body card-body-custom">
+						 <p class="card-text">
+	                        Total Associates: <span th:text="${totalAssociates}"></span>
+	                    </p>					
+					</div>
+					<div class="card-footer card-footer-custom">
+						<a href="manage-associates" class="btn btn-primary btn-block">Manage
+							Associaters</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Card for Posters -->
+			<div class="col-md-3 col-12 mb-4">
+				<div class="card card-custom">
+					<div class="card-header card-header-custom">
+						<h5 class="card-title card-title-custom">Posters</h5>
+					</div>
+					<div class="card-body card-body-custom">
+						<p class="card-text">
+	                        Total Posters: <span th:text="${totalPosters}"></span>
+	                    </p>						
+					</div>
+					<div class="card-footer card-footer-custom">
+						<a href="manage-posters" class="btn btn-primary btn-block">Manage Posters</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Card for Gallery -->
+			<div class="col-md-3 col-12 mb-4">
+				<div class="card card-custom">
+					<div class="card-header card-header-custom">
+						<h5 class="card-title card-title-custom">Credentials
+						</h5>
+					</div>
+					<div class="card-body card-body-custom">
+						<p class="card-text">
+	                        Total Credentials: <span th:text="${totalGalleryImages}"></span>
+	                    </p>
+					</div>
+					<div class="card-footer card-footer-custom">
+						<a href="manage-gallery" class="btn btn-primary btn-block">Manage Gallery</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Card for Participants -->
+			<div class="col-md-3 col-12 mb-4">
+				<div class="card card-custom">
+					<div class="card-header card-header-custom">
+						<h5 class="card-title card-title-custom">Participants</h5>
+					</div>
+					<div class="card-body card-body-custom">
+						<p class="card-text">
+	                        	Total participants: <span th:text="${totalParticipants}"></span>
+	                    </p>										
+					</div>
+					<div class="card-footer card-footer-custom">
+						<a href="manage-participants" class="btn btn-primary btn-block">Manage
+							Participants</a>
+					</div>
+				</div>
+			</div>
+	
+						<!-- Card for Participants -->
+			<div class="col-md-3 col-12 mb-4">
+				<div class="card card-custom">
+					<div class="card-header card-header-custom">
+						<h5 class="card-title card-title-custom">Contact Us</h5>
+					</div>
+					<div class="card-body card-body-custom">
+						<p class="card-text">
+	                        	Total Queries: <span th:text="${totalContacts}"></span>
+	                    </p>										
+					</div>
+					<div class="card-footer card-footer-custom">
+						<a href="manage-contacts" class="btn btn-primary btn-block">Manage
+							Queries</a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+<div th:fragment="dashboardfooter">
+	<footer class="footer mt-auto py-3 bg-dark">
+	    <div class="text-center">
+	        <span class="text-light">© 2024 Marathon Event Management</span>
+	    </div>
+	</footer>
+</div>
+	<!-- Bootstrap JS and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

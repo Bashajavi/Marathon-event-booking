@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.navbar {
+	background-color: #343a40;
+}
+
+.navbar-brand {
+	color: #fff;
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+	color: #fff;
+	font-weight: bold;
+}

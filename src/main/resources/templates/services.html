@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B12 Marathon - Services</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 50px 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .content-section h3 {
+            color: #343a40;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+
+        .content-section p {
+            color: #666;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+        
+        /* Responsive Images */
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Custom Image Size */
+        .custom-img {
+            max-width: 200px; /* Adjust width as needed */
+            height: auto;
+        }
+        /* Footer Section */
+        #footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }        
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">B12 Marathon</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sports-timing">Sports Timing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#race-management">Race Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#running-essentials">Running Event Essentials</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="#road-map">Road Map</a>
+                    </li>                                       
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contactus">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sports Timing Content Section -->
+    <section id="sports-timing" class="content-section">
+        <div class="container">
+            <h3 class="text-center mb-5">Sports Timing</h3>
+            <p>We provide accurate and reliable sports timing services for all types of sporting events. Our state-of-the-art timing technology ensures precise results and seamless event management. Whether it's a marathon, triathlon, or cycling race, you can trust us for professional timing solutions.</p>
+        </div>
+    </section>
+
+    <!-- Race Management Content Section -->
+    <section id="race-management" class="content-section bg-light">
+        <div class="container">
+            <h3 class="text-center mb-5">Race Management</h3>
+            <p>From event planning to execution, our experienced team offers comprehensive race management services to ensure the success of your event. We handle all aspects of race organization, including course design, participant registration, logistics, and more. Let us take care of the details while you focus on delivering an unforgettable experience for participants.</p>
+        </div>
+    </section>
+
+    <!-- Running Event Essentials Content Section -->
+    <section id="running-essentials" class="content-section">
+        <div class="container">
+            <h3 class="text-center mb-5">Running Event Essentials</h3>
+            <p>Make your running event a success with our range of essential services and equipment. From bibs and timing chips to hydration stations and medical support, we provide everything you need to ensure a safe and enjoyable experience for participants. Trust us to deliver high-quality essentials that meet the demands of your event.</p>
+            
+            <!-- Additional Services and Images -->
+            <div class="row mt-5">
+			    <div class="col-md-6" th:each="gallery : ${galleries}">
+			        <img th:src="@{/images/{imageName}(imageName=${gallery.imageName})}" th:alt="${gallery.name}" class="img-fluid custom-img mb-3">
+			        <h4 th:text="${gallery.name}" class="mb-3"></h4>                    
+			    </div>
+			</div>
+            
+            <p>Get custom-designed event t-shirts for your participants to remember the experience. High-quality medals to reward participants for their achievements and motivate them to do their best.</p>
+        </div>
+    </section>
+    
+<!-- Road Map Content Section -->
+<section id="road-map" class="content-section bg-light" >
+    <div class="container">
+        <h3 class="text-center mb-5">Road Map</h3>
+        <p>Plan your route with our detailed road maps tailored for running events. Our maps provide accurate distances, elevation profiles, and key landmarks to help you design the perfect course for your event.</p>
+        
+        <!-- Road Map Image -->
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <img src="images/five.jpeg" alt="Road Map" class="img-fluid custom-img mb-3" style="max-width: 100%; height: auto;">
+                    <h4 class="mb-3">5 kilometers Map</h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+				<div class="text-center">
+                    <img src="images/ten.jpeg" alt="Road Map" class="img-fluid custom-img mb-3" style="max-width: 100%; height: auto;">
+                    <h4 class="mb-3">10 kilometers Map</h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+				<div class="text-center">
+                    <img src="images/twentyone.jpeg" alt="Road Map" class="img-fluid custom-img mb-3" style="max-width: 100%; height: 287px;">
+                    <h4 class="mb-3">21 kilometers Map</h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+				<div class="text-center">
+                    <img src="images/fourtytwo.jpeg" alt="Road Map" class="img-fluid custom-img mb-3" style="max-width: 100%; height: auto;">
+                    <h4 class="mb-3">42 kilometers Map</h4>
+                </div>
+            </div>
+        </div>               
+    </div>
+</section>
+
+    <!-- Footer Section -->
+    <footer id="footer">
+        <div class="container">
+            <p>&copy; 2024 B12 Marathon. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

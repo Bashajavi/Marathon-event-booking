@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Results</title>
+<!-- Bootstrap CSS -->
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Custom CSS -->
+<style>
+body {
+	font-family: Arial, sans-serif;
+	min-height: 100vh;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	overflow: auto; /* Add overflow to handle content overflow */
+}
+/* Container styles */
+.content {
+	padding-bottom: 178px;
+	/* Add padding bottom to create space for the footer */
+}
+
+.navbar {
+	background-color: #343a40;
+}
+
+.navbar-brand {
+	color: #fff;
+	font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+	color: #fff;
+	font-weight: bold;
+}
+
+#search-results {
+	padding: 50px 0;
+	flex-grow: 1;
+}
+
+.result-item {
+	background-color: #f8f9fa;
+	margin-bottom: 10px;
+	padding: 15px;
+}
+
+.footer {
+    width: 100%;
+    background-color: #f8f9fa; /* Set background color of footer */
+    padding: 20px 0; /* Add padding to the top and bottom */
+}
+
+
+.category-title {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #333; /* Dark gray */
+	margin-top: 20px;
+}
+
+.btn-category {
+	width: 100%;
+	max-width: 200px;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	background-color: #007bff; /* Blue color */
+	border-color: #007bff; /* Blue color */
+}
+
+.btn-category:hover {
+	background-color: #0056b3; /* Darker blue color on hover */
+	border-color: #0056b3; /* Darker blue color on hover */
+}
+</style>
+</head>
+<body>
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-dark">
+		<div class="container">
+			<a class="navbar-brand" href="#">Your Brand</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="/services">Services</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/aboutus">About
+							Us</a></li>
+					<li class="nav-item"><a class="nav-link" href="/contactus">Contact
+							Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<section id="search-results">
+    <div class="container">
+        <h3 class="text-center mb-4">Search Results</h3>
+        <div class="row justify-content-center">
+            <div class="col-6 col-md-3">
+                <a href="/5k-leaderboard" class="btn btn-primary btn-category">5K</a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="/10k-leaderboard" class="btn btn-primary btn-category">10K</a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="/21k-leaderboard" class="btn btn-primary btn-category">21K</a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="/42k-leaderboard" class="btn btn-primary btn-category">42K</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+	<div class="container content">
+		<div class="row">
+			<div class="col-md-12">
+				<p class="text-center">Check out the latest race results to see who emerged victorious in the 5K, 10K, 21K, and 42K categories. Our comprehensive results section provides detailed information on participant times, rankings, and more. Stay updated with real-time results as we strive to deliver accurate and timely race data to all our participants and supporters. Remember, places are finalized after the finish time update!</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<!-- <footer class="footer text-center">
+		<div class="container">
+			<p>&copy; 2024 Your Company. All rights reserved.</p>
+		</div>
+	</footer> -->
+
+<!-- Footer Section -->
+    <footer class="footer text-center bg-dark text-light">
+        <div class="container">
+            <p>&copy; 2024 B12 Marathon. All rights reserved.</p>
+        </div>
+    </footer>
+	<!-- Bootstrap Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

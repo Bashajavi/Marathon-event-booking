@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Participants</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <style>
+        /* Additional CSS styles for responsiveness */
+        .table-responsive {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="~{dashboard :: navbar}"></div>
+    <div class="container mt-4">
+        <h3 class="text-center mb-4">Manage Participants</h3>
+
+        <!-- Display session message -->
+        <div th:if="${message}" th:classappend="${message.startsWith('Participant deleted') ? 'alert-danger' : 'alert-success'}" class="alert pb-0">
+            <p th:text="${message}"></p>
+        </div>
+
+        <!-- Display Participants Table -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Participants</h5>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Records per page</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="?size=5">5</a>
+                        <a class="dropdown-item" href="?size=10">10</a>
+                        <a class="dropdown-item" href="?size=15">15</a>
+                        <a class="dropdown-item" href="?size=20">20</a>
+                        <a class="dropdown-item" href="?size=25">25</a>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <a type="button" class="btn btn-primary mr-2 btn-sm" href="/add-participant">Add Participant</a>
+                    <a type="button" class="btn btn-warning btn-sm text-center" th:href="@{/mail-participant}">Mail</a>
+                </div>
+            </div>
+                 
+            
+            <div class="card-body">
+                <!-- Search box -->
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search by name" id="searchInput">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Email</th>
+                                <th>Category</th>
+                                <th>T-Shirt Size</th>
+                                <th>Address</th>
+                                <th>Bib Number</th>
+                                <th>Status</th>
+                                <th>Finish Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="participantTableBody">
+                            <!-- Iterate over participant data -->
+                            <tr th:each="participant, iterStat : ${pagedParticipants.content}" class="participantRow">
+                                <td th:text="${iterStat.index + pagedParticipants.pageable.offset + 1}"></td>
+                                <td th:text="${participant.name}"></td>
+                                <td th:text="${participant.age}"></td>
+                                <td th:text="${participant.gender}"></td>
+                                <td th:text="${participant.email}"></td>
+                                <td th:text="${participant.category}"></td>
+                                <td th:text="${participant.tshirtSize}"></td>
+                                <td th:text="${participant.address}"></td>
+                                <td th:text="${participant.bibNumber}"></td>
+                                <td th:text="${participant.status}"></td>
+                                <td th:text="${participant.finishTime}"></td>
+                                <td>
+                                    <!-- Edit, Delete, and Mail links -->
+                                    <div class="btn-group" role="group">
+                                        <a type="button" class="btn btn-primary btn-sm" th:href="@{/edit-participant/{id}(id=${participant.id})}">Edit</a>
+                                        <a type="button" class="btn btn-danger btn-sm" th:href="@{/delete-participant/{id}(id=${participant.id})}">Delete</a>                                        
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Display range of entities -->
+                <p th:if="${pagedParticipants.totalPages > 0}" th:text="'Showing entities ' + (${pagedParticipants.number * pagedParticipants.size + 1}) + ' - ' + (${pagedParticipants.number * pagedParticipants.size + pagedParticipants.numberOfElements}) + ' of ' + ${pagedParticipants.totalElements}"></p>
+            </div>
+        </div>
+      
+        <!-- Pagination -->
+        <nav aria-label="Pagination" class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li th:class="${pagedParticipants.first ? 'page-item disabled' : 'page-item'}">
+                    <a class="page-link" th:href="@{|?page=${pagedParticipants.number - 1}|}">Previous</a>
+                </li>
+                <li th:each="page : ${#numbers.sequence(0, pagedParticipants.totalPages - 1)}" th:class="${pagedParticipants.number == page ? 'page-item active' : 'page-item'}">
+                    <a class="page-link" th:href="@{|?page=${page}|}">[[${page + 1}]]</a>
+                </li>
+                <li th:class="${pagedParticipants.last ? 'page-item disabled' : 'page-item'}">
+                    <a class="page-link" th:href="@{|?page=${pagedParticipants.number + 1}|}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div th:replace="~{dashboard :: dashboardfooter}"></div>
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Manually initialize Bootstrap dropdowns
+            $('.dropdown-toggle').click(function() {
+                $(this).next('.dropdown-menu').toggleClass('show');
+            });
+
+            $(document).click(function(e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    $('.dropdown-menu').removeClass('show');
+                }
+            });
+
+            // Search functionality
+            $('#searchButton').click(function() {
+                var searchTerm = $('#searchInput').val().toLowerCase();
+                $('.participantRow').each(function() {
+                    var name = $(this).find('td:eq(1)').text().toLowerCase();
+                    if (name.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

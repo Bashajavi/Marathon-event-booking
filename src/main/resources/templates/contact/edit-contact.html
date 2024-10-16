@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Contact</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include Bootstrap Timepicker CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Update Contact</h1>
+        
+        <!-- Update Contact Form -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Update Contact
+            </div>
+            <div class="card-body">
+                <form th:action="@{/edit-contact/{id}(id=${contact.id})}" th:object="${contact}" method="post">
+                    <div class="form-group">
+                        <label for="contactName">Contact Name:</label>
+                        <input type="text" class="form-control" id="contactName" th:field="*{name}" placeholder="Enter updated contact name">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email:</label>
+                        <input type="email" class="form-control" id="contactEmail" th:field="*{email}" placeholder="Enter updated email">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPhone">Phone:</label>
+                        <input type="text" class="form-control" id="contactPhone" th:field="*{phone}" placeholder="Enter updated phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactMessage">Message:</label>
+                        <textarea class="form-control" id="contactMessage" th:field="*{message}" rows="5" placeholder="Your Message"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactStatus">Status:</label>
+                        <select class="form-control" id="contactStatus" th:field="*{status}">
+                        	<option value="Unrespond">Unrespond</option>
+                            <option value="Respond">Respond</option>                            
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Update Contact</button>
+                </form>
+            </div>
+        </div>        
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include jQuery (required) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Include Bootstrap Timepicker JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
+    <!-- Initialize Timepicker -->
+    <script>
+        $(document).ready(function() {
+            $('.timepicker').timepicker({
+                showSeconds : true,
+                showMeridian : false,
+                defaultTime : false,
+                showInputs : false,
+                format : 'HH:mm:ss'
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Results for 42K</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/style.css">    
+<!-- Custom CSS -->
+<style>
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+.navbar {
+    background-color: #343a40;
+}
+.navbar-brand {
+    color: #fff;
+    font-weight: bold;
+}
+.navbar-nav .nav-link {
+    color: #fff;
+    font-weight: bold;
+}
+/* Container styles */
+.container {
+    padding-bottom: 10px;
+}
+
+.tablecontainer {
+    padding-bottom: 193px;
+}
+
+</style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">    
+        <a class="navbar-brand" href="#">B12 Marathon</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="/aboutus">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contactus">Contact Us</a></li>
+            </ul>
+        </div>
+      </div>    
+</nav>
+
+<div class="tablecontainer container mt-4">
+    <h3 class="text-center mb-4">View Results for 42K</h3>
+
+    <!-- Search Bar -->
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search for participants or bib numbers..." id="searchInput">
+        <button class="btn btn-primary" type="button" onclick="searchParticipants()">Search</button>
+    </div>
+
+    <!-- Display Participants Table -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Participants</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Place</th>
+                            <th>Bib Number</th>
+                            <th>Name</th>
+                            <th>Finish Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="participantTableBody">                        
+                         <!-- Participant data will be dynamically inserted here -->
+                         <tr th:each="participant, iterStat : ${participants}">
+        					<td th:text="${iterStat.count}"></td> <!-- Display the count as the ID -->
+					        <td th:text="${participant.bibNumber}"></td>
+					        <td th:text="${participant.name}"></td>
+					        <td th:text="${participant.finishTime}"></td>
+					    </tr>                            
+                    </tbody>
+                </table>
+            </div>            
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer class="footer text-center bg-dark text-light ">    
+        <p>&copy; 2024 B12 Marathon. All rights reserved.</p>    
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // JavaScript function to filter participants based on search query
+    function searchParticipants() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("participantTableBody");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            var nameTd = tr[i].getElementsByTagName("td")[2]; // Index of the column containing participant names
+            var bibTd = tr[i].getElementsByTagName("td")[1]; // Index of the column containing bib numbers
+            if (nameTd || bibTd) {
+                var nameValue = nameTd.textContent || nameTd.innerText;
+                var bibValue = bibTd.textContent || bibTd.innerText;
+                if (nameValue.toUpperCase().indexOf(filter) > -1 || bibValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Participant</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include Bootstrap Timepicker CSS -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css"
+	rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Update Participant</h1>
+        
+        <!-- Update Participant Form -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Update Participant
+            </div>
+            <div class="card-body">
+                <form th:action="@{/edit-participant/{id}(id=${participant.id})}" th:object="${participant}" method="post">
+                    <div class="form-group">
+                        <label for="participantName">Participant Name:</label>
+                        <input type="text" class="form-control" id="participantName" th:field="*{name}" placeholder="Enter updated participant name">
+                    </div>
+                    <div class="form-group">
+                        <label for="participantAge">Age:</label>
+                        <input type="number" class="form-control" id="participantAge" th:field="*{age}" placeholder="Enter updated age">
+                    </div>
+                    <div class="form-group">
+                        <label for="participantGender">Gender:</label>
+                        <select class="form-control" id="participantGender" th:field="*{gender}">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="participantEmail">Email:</label>
+                        <input type="email" class="form-control" id="participantEmail" th:field="*{email}" placeholder="Enter updated email">
+                    </div>
+                    <div class="form-group">
+                        <label for="participantEventCategory">Event Category:</label>
+                        <select class="form-control" id="participantEventCategory" th:field="*{category}">
+                            <option value="5K">5K</option>
+                            <option value="10K">10K</option>
+                            <option value="21K">21K</option>
+                            <option value="42K">42K</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="participantTshirtSize">T-Shirt Size:</label>
+                        <select class="form-control" id="participantTshirtSize" th:field="*{tshirtSize}">
+                            <option value="S">Small</option>
+                            <option value="M">Medium</option>
+                            <option value="L">Large</option>
+                            <option value="XL">Extra Large</option>
+                        </select>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="participantBibNumber">Bib Number:</label>
+                        <input type="text" class="form-control" id="participantBibNumber" th:field="*{bibnumber}" placeholder="Enter bib number">
+                    </div> -->                    
+                    <div class="form-group">
+                        <label for="participantAddress">Address:</label>
+                        <input type="text" class="form-control" id="participantAddress" th:field="*{address}" placeholder="Enter updated address">
+                    </div>  
+                    
+                    <div class="form-group">
+						<label for="participantStatus">Status:</label>
+						    <select class="form-control" id="participantStatus" th:field="*{status}">
+						    	<option value="NA">Registration</option>
+						        <option value="Goodies">Goodies</option>
+						        <option value="Result">Result</option>
+						        <option value="Certificate">Certificate</option>
+						        <option value="Images">Images</option>
+						    </select>    
+					</div>
+                     <!-- <input type="hidden" th:field="*{finishTime}"> -->
+                    <!-- <input type="hidden" id="finishTime" class="form-control timepicker" th:field="*{finishTime}"> -->                                      
+                    <button type="submit" class="btn btn-primary">Update Participant</button>
+                </form>
+            </div>
+            <div class="card-body">
+            	<!-- Finish Time Form -->
+					<form th:action="@{/edit-participant/{id}(id=${participant.id})}" th:object="${participant}" method="post">						
+						<input type="hidden" th:field="*{id}"> <input
+							type="hidden" th:field="*{name}"> <input type="hidden"
+							th:field="*{age}"> <input type="hidden"
+							th:field="*{email}"> <input type="hidden"
+							th:field="*{category}"> <input type="hidden"
+							th:field="*{gender}"> <input type="hidden"
+							th:field="*{address}">
+							<input type="hidden" th:field="*{status}"> 
+							<!-- <input type="hidden" th:field="*{bibNumber}"> --> 
+							<input type="hidden" th:field="*{tshirtSize}">
+						<div class="form-group">
+							<label for="finishTime">Finish Time (with nanoseconds):</label> <input
+								type="text" id="finishTime" class="form-control timepicker"
+								th:field="*{finishTime}">
+						</div>						
+												
+						<button type="submit" class="btn btn-primary">Update
+							Finish Time</button>
+					</form>            
+            </div>
+        </div>        
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include jQuery (required) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Include Bootstrap Timepicker JS -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
+	<!-- Initialize Timepicker -->
+	<script>
+		$(document).ready(function() {
+			$('.timepicker').timepicker({
+				showSeconds : true,
+				showMeridian : false,
+				defaultTime : false,
+				showInputs : false,
+				format : 'HH:mm:ss'
+			});
+		});
+	</script>
+    
+</body>
+</html>

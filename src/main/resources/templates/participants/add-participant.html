@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Participant</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <div th:replace="~{dashboard :: navbar}"></div>
+    <div class="container mt-4 flex-grow-1">
+        <h1 class="text-center mb-4">Add Participant</h1>
+        <!-- Add Participant Form -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Add Participant
+            </div>
+            <div class="card-body">
+                <form action="/add-participant" th:object="${participant}" method="post">
+                    <div class="form-group">
+                        <label for="participantName">Participant Name:</label>
+                        <input type="text" class="form-control" id="participantName" th:field="*{name}" placeholder="Enter participant name">
+                    </div>
+                    <div class="form-group">
+                        <label for="participantAge">Age:</label>
+                        <input type="number" class="form-control" id="participantAge" th:field="*{age}" placeholder="Enter age">
+                    </div>
+                    <div class="form-group">
+                        <label for="participantGender">Gender:</label>
+                        <select class="form-control" id="participantGender" th:field="*{gender}">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="participantEmail">Email:</label>
+                        <input type="email" class="form-control" id="participantEmail" th:field="*{email}" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="participantEventCategory">Event Category:</label>
+                        <select class="form-control" id="participantEventCategory" th:field="*{category}">
+                            <option value="5K">5K</option>
+                            <option value="10K">10K</option>
+                            <option value="21K">21K</option>
+                            <option value="42K">42K</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="participantTshirtSize">T-Shirt Size:</label>
+                        <select class="form-control" id="participantTshirtSize" th:field="*{tshirtSize}">
+                            <option value="XS">XS (Extra Small)</option>
+                            <option value="S">S (Small)</option>
+                            <option value="M">M (Medium)</option>
+                            <option value="L">L (Large)</option>
+                            <option value="XL">XL (Extra Large)</option>
+                            <option value="XXL">XXL (Double Extra Large)</option>
+                            <option value="XXXL">XXXL (Triple Extra Large)</option>
+                        </select>
+                    </div>                    
+                    <div class="form-group">
+                        <label for="participantAddress">Address:</label>
+                        <input type="text" class="form-control" id="participantAddress" th:field="*{address}" placeholder="Enter address">
+                    </div>                 
+                    <button type="submit" class="btn btn-primary">Add Participant</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{dashboard :: dashboardfooter}"></div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
