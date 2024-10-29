@@ -1,8 +1,8 @@
 -- Create the database if it doesn't exist
-CREATE DATABASE IF NOT EXISTS marathon;
+CREATE DATABASE IF NOT EXISTS defaultdb;
 
 -- Switch to the created database
-USE marathon;
+USE defaultdb;
 
 CREATE TABLE IF NOT EXISTS customer (
     id INT AUTO_INCREMENT PRIMARY KEY,
