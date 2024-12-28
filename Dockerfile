@@ -16,5 +16,5 @@ COPY --from=build /app/target/springsecurity-learning-bcrypt-0.0.1-SNAPSHOT.jar 
 # Expose the default port
 EXPOSE 8080
 
-# JVM optimization for high performance
-ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:+UseG1GC", "-Xmx1024m", "-Xms512m", "-jar", "/app/app.jar"]
+# JVM optimization for high performance and memory handling
+ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:+UseG1GC", "-Xmx2048m", "-Xms1024m", "-Dspring.jpa.open-in-view=false", "-jar", "/app/app.jar"]
