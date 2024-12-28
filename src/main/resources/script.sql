@@ -12,8 +12,9 @@ CREATE TABLE IF NOT EXISTS customer (
 );
 
 INSERT INTO customer (email, pwd, role) 
-VALUES ('bashajavi@gmail.com', '$2a$10$Bo7KEslHgVbSbY/uttsEUOh4MJ1tKXSoz7cOoQo//Ily0tGaIY49m', 'user')
-ON DUPLICATE KEY UPDATE email=email;
+SELECT 'bashajavi@gmail.com', '$2a$10$Bo7KEslHgVbSbY/uttsEUOh4MJ1tKXSoz7cOoQo//Ily0tGaIY49m', 'user'
+FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM customer WHERE email = 'bashajavi@gmail.com');
 
 CREATE TABLE IF NOT EXISTS sponsor (
     id INT AUTO_INCREMENT PRIMARY KEY,
