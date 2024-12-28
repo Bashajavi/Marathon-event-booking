@@ -30,7 +30,7 @@ COPY --from=build /app/target/springsecurity-learning-bcrypt-0.0.1-SNAPSHOT.jar 
 EXPOSE 8080
 
 # Set JVM options for better performance (latency optimization)
-ENV JAVA_OPTS="-XX:+UseG1GC -XX:MaxRAMPercentage=75 -XX:InitiatingHeapOccupancyPercent=45 -Djava.security.egd=file:/dev/./urandom"
+ENV JAVA_OPTS="-XX:+UseG1GC -XX:MaxRAMPercentage=75 -XX:InitiatingHeapOccupancyPercent=35 -XX:+AlwaysPreTouch -XX:+ParallelRefProcEnabled -Djava.security.egd=file:/dev/./urandom"
 
 # Run the application with optimized JVM settings
 ENTRYPOINT ["java", "$JAVA_OPTS", "-jar", "/app.jar"]
